@@ -8,6 +8,10 @@
                 console.log(msg);
             }
 
+            function toArray(args){
+                return [].slice.call(args);
+            }
+
             /**
              * 넘어온 인자의 모든 값을 비교(동등연산자 "==" 사용) 인자가 2개 미만일 때, false 반환
              * @returns {Boolean}
@@ -18,11 +22,12 @@
                     return false;
                 } else {
                     var rtn = 0;
+                    var arr = toArray(arguments);
+                    var len = arr.length;
 
-                    [].reduce.call(arguments, function (a, b) {
-                        if (a != b) rtn++;
-                        return b;
-                    });
+                    while(--len) {
+                        if (arr[len] != arr[len - 1]) rtn++;
+                    }
 
                     return !rtn;
                 }
@@ -38,11 +43,12 @@
                     return false;
                 } else {
                     var rtn = 0;
+                    var arr = toArray(arguments);
+                    var len = arr.length;
 
-                    [].reduce.call(arguments, function (a, b) {
-                        if (a !== b) rtn++;
-                        return b;
-                    });
+                    while(--len) {
+                        if (arr[len] != arr[len - 1]) rtn++;
+                    }
 
                     return !rtn;
                 }
@@ -50,6 +56,7 @@
 
             return {
                 log: log,
+                toArray: toArray,
                 equal: equal,
                 same: same
             };
