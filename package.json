@@ -1,0 +1,29 @@
+{
+  "name": "jquery-plugin",
+  "version": "1.0.0",
+  "description": "``` https://rawgit.com/aeei/jquery-plugin/master/dist/jquery-plugin.min.js ```",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^2.0.0",
+    "jquery": "^3.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aeei/jquery-plugin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aeei/jquery-plugin/issues"
+  },
+  "homepage": "https://github.com/aeei/jquery-plugin#readme"
+}

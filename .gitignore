@@ -111,3 +111,5 @@ fabric.properties
 # *.ipr
 
 # End of https://www.gitignore.io/api/node,bower,intellij
+/.idea/
+.idea/
