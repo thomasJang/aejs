@@ -7,11 +7,13 @@
             function log(msg) {
                 console.log(msg);
             }
-
+            /**
+             * @param {*...} args
+             * @returns {Array}
+             */
             function toArray(args) {
                 return [].slice.call(args);
             }
-
             /**
              * 원시 값 비교 (string, number, boolean, null, undefined)
              * 넘어온 인자의 모든 값을 비교, 인자가 2개 미만일 때, false 반환
