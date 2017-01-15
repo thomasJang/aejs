@@ -47,7 +47,7 @@
                     var len = arr.length;
 
                     while(--len) {
-                        if (arr[len] != arr[len - 1]) rtn++;
+                        if (arr[len] !== arr[len - 1]) rtn++;
                     }
 
                     return !rtn;
