@@ -10,8 +10,8 @@ var uglify = require('gulp-uglify');
 // gulp.task()를 사용해 gulp-concat 업무 수행을 정의
 gulp.task('concat:js', function () {
     return gulp
-        .src('src/jquery-plugin.js')
-        .pipe(concat('jquery-plugin.min.js'))
+        .src('src/ae.js')
+        .pipe(concat('ae.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dist'));
 });

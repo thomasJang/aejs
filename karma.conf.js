@@ -13,7 +13,7 @@ module.exports = function (config) {
             // dependencies
             'node_modules/jquery/dist/jquery.min.js',
             // application code
-            'dist/jquery-plugin.min.js',
+            'dist/ae.min.js',
             // test dependencies
             'mocha.conf.js',
             // tests

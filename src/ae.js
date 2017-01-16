@@ -1,8 +1,15 @@
 (function () {
     var root = this;
     root["ae"] = (function () {
-        // 원시 값 클래스
-        const PV = ["[object String]", "[object Number]", "[object Boolean]", "[object Null]", "[object Undefined]"];
+        /**
+         * 기본 값, 원시 값
+         * @type {[*]}
+         */
+        const PRIMITIVE_VALUES = ["[object String]", "[object Number]", "[object Boolean]", "[object Null]", "[object Undefined]"];
+        /**
+         * @type {string}
+         */
+        const LESS_MESSAGE = "The length of the arguments cannot be less than 2.";
         /**
          * console log
          * @param {String} msg
@@ -25,13 +32,16 @@
         var toString = function (obj) {
             ({}).toString.call(obj);
         };
+        var keys = function (obj) {
+            Object.keys(obj);
+        }
         /**
          * 객체의 클래스가 원시 값인지 찬반형 결과를 반환
          * @param obj
          * @returns {boolean}
          */
         var isPrimitive = function (obj) {
-            return PV.indexOf(toString(obj)) > -1;
+            return PRIMITIVE_VALUES.indexOf(toString(obj)) > -1;
         }
         var isArray = function (obj) {
             return toString(obj) === "[object Array]";
@@ -47,7 +57,7 @@
          */
         function equalAll() {
             if (arguments.length < 2) {
-                log("The length of the arguments cannot be less than 2."); // 구글 번역기 POWER!
+                log(LESS_MESSAGE); // 구글 번역기 POWER!
                 return false;
             } else {
                 var rtn = 0;
@@ -67,13 +77,13 @@
         }
         /**
          * 원시 값 비교 (string, number, boolean, null, undefined)
-         * 넘어온 인자의 모든 값을 비교, 인자가 2개 미만일 때, false 반환
+         * 넘어온 인자의 모든 값을 비교, 인자가 2개 미만일 때, LESS_MESSAGE 반환
          * 비교 대상을 첫 번째 인자로 설정!
          * @returns {String}
          */
         function equalAllRtnMsg() {
             if (arguments.length < 2) {
-                return "The length of the arguments cannot be less than 2.";
+                return LESS_MESSAGE;
             } else {
                 var rtn = [];
                 var arr = [].slice.call(arguments);
