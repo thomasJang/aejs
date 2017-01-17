@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/aeei/jquery-plugin.svg)](https://travis-ci.org/aeei/jquery-plugin)
-# jquery-plugin
+[![Build Status](https://travis-ci.org/aeei/aejs.svg)](https://travis-ci.org/aeei/aejs)
+# aejs
 ```
-https://rawgit.com/aeei/jquery-plugin/master/dist/jquery-plugin.min.js
+https://rawgit.com/aeei/aejs/master/dist/ae.min.js
 ```
