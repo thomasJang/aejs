@@ -1,23 +1,74 @@
-describe('Test equal : compare all primitive value', function () {
-    'use strict';
-
-    it('Test number', function (done) {
-        done(ae.equalAll(11, 11));
+describe('ae.equalAll', function () {
+    it('number', function (done) {
+        done(
+            !ae.isEqualAll(1, 1, 1, 1, 1)
+            || ae.isEqualAll(1, 1, 2, 1, 1)
+            || ae.isEqualAll(2, 1, 1, 1, 1)
+            || ae.isEqualAll(1, 1, 1, 1, 2)
+        );
     });
 
-    it('Test string', function (done) {
-        done(ae.equalAll("11", '11'));
+    it('string', function (done) {
+        done(
+            !ae.isEqualAll("1", "1", "1", "1", "1")
+            || !ae.isEqualAll('1', "1", '1', "1", '1')
+            || ae.isEqualAll("1", "1", "2", "1", "1")
+            || ae.isEqualAll("2", "1", "1", "1", "1")
+            || ae.isEqualAll("1", "1", "1", "1", "2")
+        );
     });
 
-    it('Test boolean', function (done) {
-        done(ae.equalAll(true, true));
+    it('boolean', function (done) {
+        done(
+            !ae.isEqualAll(true, true, true, true, true)
+            || ae.isEqualAll(true, true, false, true, true)
+            || ae.isEqualAll(false, true, true, true, true)
+            || ae.isEqualAll(true, true, true, true, false)
+        );
     });
 
-    it('Test null', function (done) {
-        done(ae.equalAll(null, null));
+    it('null', function (done) {
+        done(
+            !ae.isEqualAll(null, null, null, null, null)
+            || ae.isEqualAll(null, null, {}, null, null)
+            || ae.isEqualAll({}, null, null, null, null)
+            || ae.isEqualAll(null, null, null, null, {})
+        );
     });
 
-    it('Test undefined', function (done) {
-        done(ae.equalAll(undefined, undefined));
+    it('undefined', function (done) {
+        done(
+            !ae.isEqualAll(undefined, undefined, undefined, undefined, undefined)
+            || ae.isEqualAll(undefined, undefined, {}, undefined, undefined)
+            || ae.isEqualAll({}, undefined, undefined, undefined, undefined)
+            || ae.isEqualAll(undefined, undefined, undefined, undefined, {})
+        );
+    });
+
+    it('array', function (done) {
+        done(
+            !ae.isEqualAll([1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7]]], [1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7]]], [1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7]]], [1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7]]], [1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7]]])
+            || ae.isEqualAll([1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7]]], [1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7]]], [1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7, [9, 11]]]], [1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7]]], [1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7]]])
+            || ae.isEqualAll([1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7, [9, 11]]]], [1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7]]], [1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7]]], [1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7]]], [1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7]]])
+            || ae.isEqualAll([1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7]]], [1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7]]], [1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7]]], [1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7]]], [1, [2, 4, 5, [10, 11]], 3, [4, 5, [6, 7, [9, 11]]]])
+        );
+    });
+
+    it('object', function (done) {
+        done(
+            !ae.isEqualAll({a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 15}}}, {a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 15}}}, {a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 15}}}, {a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 15}}}, {a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 15}}})
+            || ae.isEqualAll({a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 15}}}, {a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 15}}}, {a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 17}}}, {a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 15}}}, {a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 15}}})
+            || ae.isEqualAll({a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 17}}}, {a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 15}}}, {a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 15}}}, {a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 15}}}, {a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 15}}})
+            || ae.isEqualAll({a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 15}}}, {a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 15}}}, {a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 15}}}, {a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 15}}}, {a: 1, b: {a: 1, b: 2}, c: {e: 11, f: {a: 13, g: 17}}})
+        );
+    });
+
+    it('object & array', function (done) {
+        done(
+            !ae.isEqualAll({a: [4, 5, [1, [5, 7], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}}, {a: [4, 5, [1, [5, 7], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}}, {a: [4, 5, [1, [5, 7], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}}, {a: [4, 5, [1, [5, 7], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}}, {a: [4, 5, [1, [5, 7], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}})
+            || ae.isEqualAll({a: [4, 5, [1, [5, 7], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}}, {a: [4, 5, [1, [5, 7], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}}, {a: [4, 5, [1, [5, 11], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}}, {a: [4, 5, [1, [5, 7], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}}, {a: [4, 5, [1, [5, 7], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}})
+            || ae.isEqualAll({a: [4, 5, [1, [5, 11], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}}, {a: [4, 5, [1, [5, 7], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}}, {a: [4, 5, [1, [5, 7], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}}, {a: [4, 5, [1, [5, 7], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}}, {a: [4, 5, [1, [5, 7], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}})
+            || ae.isEqualAll({a: [4, 5, [1, [5, 7], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}}, {a: [4, 5, [1, [5, 7], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}}, {a: [4, 5, [1, [5, 7], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}}, {a: [4, 5, [1, [5, 7], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}}, {a: [4, 5, [1, [5, 11], 5, 6], 6], b: {a: 1, b: 2}, c: {e: 11, f: [4, 5, 6, [1, 2]]}})
+        );
     });
 });

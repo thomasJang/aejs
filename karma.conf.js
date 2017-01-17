@@ -14,6 +14,7 @@ module.exports = function (config) {
             'node_modules/jquery/dist/jquery.min.js',
             // application code
             'dist/ae.min.js',
+            //'https://rawgit.com/aeei/aejs/master/dist/ae.min.js',
             // test dependencies
             'mocha.conf.js',
             // tests
