@@ -61,8 +61,10 @@
             stackA.push(a);
             stackB.push(b);
 
-            while (currA = stackA.pop()) {
+            while (stackA.length) {
+                currA = stackA.pop();
                 currB = stackB.pop();
+
                 // 클래스 타입이 다를 경우 false 반환
                 var str = toString(currA);
                 if (str !== toString(currB)) return false;
@@ -71,34 +73,36 @@
                 if (isContains(str, PRIMITIVE_VALUES)){
                     if (currA !== currB) return false;
                 }
-
-                // 원시 값이 아닌 다른 클래스를 가질 경우 오브젝트 키 길이를 비교 (Array, Object)
-                var len = keys(currA).length;
-                if (len !== keys(currB).length) {
-                    return false;   // 키 길이가 다를 경우 false 반환
-                }
+                // 원시 값이 아닌 다른 클래스를 가질 경우
                 else {
-                    // 비교 값이 배열일 경우
-                    if (str === "[object Array]") {
-                        while (len--) {
-                            stackA.push(currA[len]);
-                            stackB.push(currB[len]);
-                        }
-                    }// end isArray
-                    // 비교 값이 배열 외의 오브젝트일 경우 "[object Object]"
+                    // 오브젝트 키 길이를 비교 (Array, Object)
+                    var len = keys(currA).length;
+                    if (len !== keys(currB).length) {
+                        return false;   // 키 길이가 다를 경우 false 반환
+                    }
                     else {
-                        while (len--) {
-                            var key = keys(currA)[len];
-                            if (currB.hasOwnProperty(key)) {
-                                stackA.push(currA[key]);
-                                stackB.push(currB[key]);
+                        // 비교 값이 배열일 경우
+                        if (str === "[object Array]") {
+                            while (len--) {
+                                stackA.push(currA[len]);
+                                stackB.push(currB[len]);
                             }
-                            else {
-                                return false;
+                        }// end isArray
+                        // 비교 값이 배열 외의 오브젝트일 경우 "[object Object]"
+                        else {
+                            while (len--) {
+                                var key = keys(currA)[len];
+                                if (currB.hasOwnProperty(key)) {
+                                    stackA.push(currA[key]);
+                                    stackB.push(currB[key]);
+                                }
+                                else {
+                                    return false;
+                                }
                             }
-                        }
-                    }// end isObject
-                }// end else
+                        }// end isObject
+                    }// end else
+                }
             }// end while
 
             stackA = null;
@@ -169,7 +173,7 @@
             var len = arr.length;
 
             while (--len) {
-                if (!isEqualRecusive(arr[len], arr[len - 1])) return false;
+                if (!isEqual(arr[len], arr[len - 1])) return false;
             }
             return true;
         }
