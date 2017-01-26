@@ -124,7 +124,6 @@
             while (--len) {
                 if (msg = equal(arr[len], arr[len - 1])) return msg;
             }
-
             return msg;
         }
 
