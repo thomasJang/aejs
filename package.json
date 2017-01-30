@@ -19,7 +19,8 @@
     "karma-phantomjs-launcher": "^1.0.2",
     "mocha": "^3.2.0",
     "requirejs": "^2.3.2",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "gulp-sourcemaps": ""
   },
   "scripts": {
     "test": "karma start karma.conf.js"
